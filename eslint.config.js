@@ -33,6 +33,10 @@ export default [
         vi: 'readonly',
         process: 'readonly',
         __dirname: 'readonly',
+        setTimeout: 'readonly',
+        Blob: 'readonly',
+        URL: 'readonly',
+        HTMLTableRowElement: 'readonly',
       },
     },
     plugins: {

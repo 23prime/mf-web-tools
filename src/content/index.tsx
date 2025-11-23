@@ -1,10 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import '../styles/content.css';
+import { scrapeTransactionTable } from '@/utils/scraper';
+import { transactionsToCSV } from '@/utils/csv';
+import { downloadCSV, generateFilename } from '@/utils/download';
 
 // Content Script component
 function ContentWidget() {
   const [isVisible, setIsVisible] = React.useState(true);
+  const [message, setMessage] = React.useState('');
+
+  const handleDownloadCSV = () => {
+    try {
+      // Scrape transaction data
+      const transactions = scrapeTransactionTable();
+
+      if (!transactions) {
+        setMessage('テーブルが見つかりません');
+        setTimeout(() => setMessage(''), 3000);
+        return;
+      }
+
+      if (transactions.length === 0) {
+        setMessage('データがありません');
+        setTimeout(() => setMessage(''), 3000);
+        return;
+      }
+
+      // Convert to CSV
+      const csvContent = transactionsToCSV(transactions);
+
+      // Download
+      const filename = generateFilename();
+      downloadCSV(csvContent, filename);
+
+      setMessage(`${transactions.length}件のデータをダウンロードしました`);
+      setTimeout(() => setMessage(''), 3000);
+    } catch (error) {
+      console.error('CSV download error:', error);
+      setMessage('エラーが発生しました');
+      setTimeout(() => setMessage(''), 3000);
+    }
+  };
 
   if (!isVisible) return null;
 
@@ -21,9 +58,15 @@ function ContentWidget() {
             ×
           </button>
         </div>
-        <p className="text-xs text-gray-600">
-          Content script is running on this page
-        </p>
+        <button
+          onClick={handleDownloadCSV}
+          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 px-4 rounded transition-colors"
+        >
+          CSV ダウンロード
+        </button>
+        {message && (
+          <p className="text-xs text-gray-600 mt-2 text-center">{message}</p>
+        )}
       </div>
     </div>
   );
