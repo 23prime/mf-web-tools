@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "MoneyForward Web Tools",
+  "version": "1.0.0",
+  "description": "Web tools for MoneyForward",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "action": {
+    "default_popup": "src/popup/index.html",
+    "default_icon": {
+      "16": "icon-16.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "src/background/index.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.moneyforward.com/*"],
+      "js": ["src/content/index.tsx"],
+      "css": ["src/styles/content.css"]
+    }
+  ],
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://*.moneyforward.com/*"]
+}

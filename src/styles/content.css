@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+
+/* Content script specific styles */
+.mf-tools-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+}

@@ -1,0 +1,52 @@
+version: "3"
+
+tasks:
+  default:
+    cmds:
+      - task: list
+
+  list:
+    desc: List all tasks
+    cmd: task --list-all
+    aliases:
+      - l
+
+  setup:
+    desc: "Setup project"
+    cmds:
+      - mise trust -q
+      - mise install
+      - corepack enable pnpm
+      - pnpm install
+    aliases:
+      - s
+
+  dev:
+    desc: "Start development server"
+    cmd: pnpm dev
+    aliases:
+      - d
+
+  build:
+    desc: "Build project"
+    cmd: pnpm build
+    aliases:
+      - b
+
+  fix:
+    desc: "Fix"
+    cmds:
+      - pnpm format
+      - pnpm lint:fix
+    aliases:
+      - f
+
+  check:
+    desc: "Check"
+    cmds:
+      - pnpm typecheck
+      - pnpm format:check
+      - pnpm lint
+      - pnpm test
+    aliases:
+      - c
