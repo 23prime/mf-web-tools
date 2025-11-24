@@ -28,6 +28,24 @@ task list
 
 5. Select the `dist/` directory from this project
 
+### Tips
+
+#### Updating Extension Icons
+
+To update the extension icons, you need to create three sizes (16x16, 48x48, 128x128) from your source image:
+
+1. Place your source icon image (recommended: 1024x1024 or larger square image) in `tmp/` directory
+
+2. Resize to required sizes using ImageMagick:
+
+    ```sh
+    magick tmp/your-icon.png -resize 16x16 public/icon-16.png
+    magick tmp/your-icon.png -resize 48x48 public/icon-48.png
+    magick tmp/your-icon.png -resize 128x128 public/icon-128.png
+    ```
+
+3. The icons will be automatically included in the next build
+
 ## Release
 
 To create a new release:
