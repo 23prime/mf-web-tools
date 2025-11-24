@@ -21,5 +21,6 @@ globalThis.chrome = {
   tabs: {
     query: vi.fn(),
     sendMessage: vi.fn(),
+    create: vi.fn(),
   },
 } as unknown as typeof chrome;

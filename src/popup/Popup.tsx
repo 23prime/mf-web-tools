@@ -1,25 +1,6 @@
-import { useState, useEffect } from 'react';
-
 export default function Popup() {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    chrome.storage.local.get(['count'], (result) => {
-      if (typeof result.count === 'number') {
-        setCount(result.count);
-      }
-    });
-  }, []);
-
-  const handleIncrement = () => {
-    const newCount = count + 1;
-    setCount(newCount);
-    chrome.storage.local.set({ count: newCount });
-  };
-
-  const handleReset = () => {
-    setCount(0);
-    chrome.storage.local.set({ count: 0 });
+  const handleOpenTransactionPage = () => {
+    chrome.tabs.create({ url: 'https://moneyforward.com/cf' });
   };
 
   return (
@@ -29,24 +10,26 @@ export default function Popup() {
       </h1>
 
       <div className="bg-white rounded-lg shadow-md p-4 mb-4">
-        <p className="text-sm text-gray-600 mb-2">Counter Example</p>
-        <div className="text-4xl font-bold text-indigo-600 text-center mb-4">
-          {count}
-        </div>
-        <div className="flex gap-2">
-          <button
-            onClick={handleIncrement}
-            className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded transition-colors"
+        <p className="text-sm text-gray-600 mb-3">入出金ページを開く</p>
+        <button
+          onClick={handleOpenTransactionPage}
+          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-4 rounded transition-colors flex items-center justify-center gap-2"
+        >
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            Increment
-          </button>
-          <button
-            onClick={handleReset}
-            className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded transition-colors"
-          >
-            Reset
-          </button>
-        </div>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+            />
+          </svg>
+          MoneyForward 入出金
+        </button>
       </div>
 
       <div className="text-xs text-gray-500 text-center">
