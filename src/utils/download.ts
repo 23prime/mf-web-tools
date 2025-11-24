@@ -26,17 +26,31 @@ export function downloadCSV(csvContent: string, filename: string): void {
 }
 
 /**
- * Generates a filename with the current date
+ * Generates a filename based on the transaction month stored in cookies
  * @returns Filename in format: moneyforward_transactions_YYYYMMDDhhmmss
+ * @throews Error if transaction month cannot be determined from cookies
  */
 export function generateFilename(): string {
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, '0');
-  const day = String(now.getDate()).padStart(2, '0');
-  const hours = String(now.getHours()).padStart(2, '0');
-  const minutes = String(now.getMinutes()).padStart(2, '0');
-  const seconds = String(now.getSeconds()).padStart(2, '0');
-  const dateSuffix = `${year}${month}${day}_${hours}${minutes}${seconds}`;
-  return `moneyforward_transactions_${dateSuffix}`;
+  const transactionMonth = getTransactionMonth();
+  if (!transactionMonth) {
+    throw new Error('Unable to determine transaction month from cookies.');
+  }
+  return `moneyforward_transactions_${transactionMonth}`;
+}
+
+/**
+ * Retrieves the transaction month (YYYYMM) from cookies
+ * @returns Transaction month in YYYYMM format or null if not found
+ */
+function getTransactionMonth(): string | undefined {
+  const cookieName = 'cf_last_fetch_from_date';
+  const fromDate = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith(`${cookieName}=`))
+    ?.split('=')[1];
+
+  // URL decode: 2025%2F10%2F01 => 2025/10/01
+  const urlDecoded = fromDate ? decodeURIComponent(fromDate) : undefined;
+
+  return urlDecoded?.slice(0, 7).replace(/\//g, '');
 }
