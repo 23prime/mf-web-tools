@@ -34,6 +34,8 @@ export default [
         process: 'readonly',
         __dirname: 'readonly',
         setTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
         Blob: 'readonly',
         URL: 'readonly',
         HTMLTableRowElement: 'readonly',

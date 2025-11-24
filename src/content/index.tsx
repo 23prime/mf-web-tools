@@ -5,10 +5,35 @@ import { scrapeTransactionTable } from '@/utils/scraper';
 import { transactionsToCSV } from '@/utils/csv';
 import { downloadCSV, generateFilename } from '@/utils/download';
 
+// Check if current path is exactly /cf
+function isTransactionPage(): boolean {
+  return window.location.pathname === '/cf';
+}
+
 // Content Script component
 function ContentWidget() {
   const [isVisible, setIsVisible] = React.useState(true);
   const [message, setMessage] = React.useState('');
+  const [isOnTransactionPage, setIsOnTransactionPage] =
+    React.useState(isTransactionPage());
+
+  // Monitor URL changes for SPA navigation
+  React.useEffect(() => {
+    const checkPath = () => {
+      setIsOnTransactionPage(isTransactionPage());
+    };
+
+    // Check on popstate (browser back/forward)
+    window.addEventListener('popstate', checkPath);
+
+    // Check periodically for SPA navigation
+    const interval = setInterval(checkPath, 1000);
+
+    return () => {
+      window.removeEventListener('popstate', checkPath);
+      clearInterval(interval);
+    };
+  }, []);
 
   const handleDownloadCSV = () => {
     try {
@@ -60,7 +85,17 @@ function ContentWidget() {
         </div>
         <button
           onClick={handleDownloadCSV}
-          className="w-full bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium py-2 px-4 rounded transition-colors"
+          disabled={!isOnTransactionPage}
+          className={`w-full text-sm font-medium py-2 px-4 rounded transition-colors ${
+            isOnTransactionPage
+              ? 'bg-indigo-600 hover:bg-indigo-700 text-white cursor-pointer'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+          }`}
+          title={
+            isOnTransactionPage
+              ? 'CSVファイルをダウンロード'
+              : '入出金ページ (/cf) でのみ利用可能'
+          }
         >
           CSV ダウンロード
         </button>
