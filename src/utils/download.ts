@@ -27,7 +27,7 @@ export function downloadCSV(csvContent: string, filename: string): void {
 
 /**
  * Generates a filename with the current date
- * @returns Filename in format: moneyforward_transactions_YYYY-MM-DD
+ * @returns Filename in format: moneyforward_transactions_YYYYMMDDhhmmss
  */
 export function generateFilename(): string {
   const now = new Date();
@@ -37,5 +37,6 @@ export function generateFilename(): string {
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   const seconds = String(now.getSeconds()).padStart(2, '0');
-  return `moneyforward_transactions_${year}${month}${day}_${hours}${minutes}${seconds}`;
+  const dateSuffix = `${year}${month}${day}_${hours}${minutes}${seconds}`;
+  return `moneyforward_transactions_${dateSuffix}`;
 }
