@@ -22,3 +22,32 @@ updates:
     open-pull-requests-limit: 5
     commit-message:
       prefix: "deps"
+    groups:
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+      eslint:
+        patterns:
+          - "eslint"
+          - "@eslint/*"
+          - "@typescript-eslint/*"
+          - "eslint-config-*"
+          - "eslint-plugin-*"
+      vite:
+        patterns:
+          - "vite"
+          - "@vitejs/*"
+          - "vite-plugin-*"
+          - "vitest"
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+          - "postcss"
+          - "autoprefixer"
+      testing:
+        patterns:
+          - "@testing-library/*"
