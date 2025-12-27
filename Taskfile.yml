@@ -73,3 +73,14 @@ tasks:
       - task: build
     aliases:
       - cb
+
+  all:
+    desc: "Run all tasks"
+    cmds:
+      - task: clean
+      - task: install
+      - task: fix
+      - task: check
+      - task: build
+    aliases:
+      - a
