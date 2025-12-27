@@ -17,7 +17,7 @@ task list
 1. Build the extension:
 
     ```sh
-    pnpm build
+    task build
     ```
 
 2. Open Chrome and navigate to `chrome://extensions`
