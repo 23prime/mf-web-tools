@@ -50,3 +50,10 @@ tasks:
       - pnpm test
     aliases:
       - c
+
+  clean:
+    desc: "Clean project"
+    cmds:
+      - rm -rf node_modules
+      - rm -rf .output
+      - rm -rf .wxt
