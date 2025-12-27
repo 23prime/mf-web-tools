@@ -9,7 +9,14 @@ import prettierConfig from 'eslint-config-prettier';
 
 export default [
   {
-    ignores: ['dist/**', 'node_modules/**', '*.config.js', '*.config.ts'],
+    ignores: [
+      'dist/**',
+      'node_modules/**',
+      '*.config.js',
+      '*.config.ts',
+      '.output/**',
+      '.wxt/**',
+    ],
   },
   js.configs.recommended,
   {
@@ -39,6 +46,8 @@ export default [
         Blob: 'readonly',
         URL: 'readonly',
         HTMLTableRowElement: 'readonly',
+        CSSStyleSheet: 'readonly',
+        ShadowRoot: 'readonly',
       },
     },
     plugins: {

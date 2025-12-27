@@ -1,9 +1,19 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Popup from './Popup';
 
 describe('Popup', () => {
   beforeEach(() => {
+    // Mock chrome.tabs.create as a spy
+    globalThis.chrome = {
+      ...globalThis.chrome,
+      tabs: {
+        ...globalThis.chrome?.tabs,
+        create: vi.fn(),
+      },
+    } as typeof chrome;
+
     vi.clearAllMocks();
   });
 

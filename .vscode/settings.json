@@ -27,11 +27,13 @@
   // Files
   "files.exclude": {
     "node_modules": true,
-    "dist": true
+    ".output": true,
+    ".wxt": true
   },
   "search.exclude": {
     "node_modules": true,
-    "dist": true,
+    ".output": true,
+    ".wxt": true,
     "pnpm-lock.yaml": true
   },
 

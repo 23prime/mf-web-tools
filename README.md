@@ -26,7 +26,7 @@ task list
 
 4. Click "Load unpacked"
 
-5. Select the `dist/` directory from this project
+5. Select the `.output/chrome-mv3/` directory from this project
 
 ### Tips
 

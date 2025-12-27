@@ -1,9 +1,46 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '../styles/content.css';
+import { defineContentScript } from 'wxt/utils/define-content-script';
+import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root';
 import { scrapeTransactionTable } from '@/utils/scraper';
 import { transactionsToCSV } from '@/utils/csv';
 import { downloadCSV, generateFilename } from '@/utils/download';
+import contentCssText from '@/styles/content.css?inline';
+
+export default defineContentScript({
+  matches: ['https://*.moneyforward.com/*'],
+
+  async main(ctx) {
+    const ui = await createShadowRootUi(ctx, {
+      name: 'mf-tools-widget',
+      position: 'inline',
+      onMount: (container) => {
+        // Inject CSS into Shadow DOM using style element
+        const style = document.createElement('style');
+        style.textContent = contentCssText;
+        container.appendChild(style);
+
+        // Create a wrapper div inside the shadow root
+        const app = document.createElement('div');
+        container.appendChild(app);
+
+        // Create React root
+        const root = ReactDOM.createRoot(app);
+        root.render(
+          <React.StrictMode>
+            <ContentWidget />
+          </React.StrictMode>
+        );
+        return root;
+      },
+      onRemove: (root) => {
+        root?.unmount();
+      },
+    });
+
+    ui.mount();
+  },
+});
 
 // Check if current path is exactly /cf
 function isTransactionPage(): boolean {
@@ -16,6 +53,20 @@ function ContentWidget() {
   const [message, setMessage] = React.useState('');
   const [isOnTransactionPage, setIsOnTransactionPage] =
     React.useState(isTransactionPage());
+  const messageTimeoutRef = React.useRef<number | null>(null);
+
+  // Helper to set message with auto-clear
+  const showMessage = (msg: string, duration = 3000) => {
+    // Clear any existing timeout
+    if (messageTimeoutRef.current !== null) {
+      window.clearTimeout(messageTimeoutRef.current);
+    }
+    setMessage(msg);
+    messageTimeoutRef.current = window.setTimeout(() => {
+      setMessage('');
+      messageTimeoutRef.current = null;
+    }, duration);
+  };
 
   // Monitor URL changes for SPA navigation
   React.useEffect(() => {
@@ -35,20 +86,27 @@ function ContentWidget() {
     };
   }, []);
 
+  // Cleanup message timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (messageTimeoutRef.current !== null) {
+        window.clearTimeout(messageTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleDownloadCSV = () => {
     try {
       // Scrape transaction data
       const transactions = scrapeTransactionTable();
 
       if (!transactions) {
-        setMessage('テーブルが見つかりません');
-        setTimeout(() => setMessage(''), 3000);
+        showMessage('テーブルが見つかりません');
         return;
       }
 
       if (transactions.length === 0) {
-        setMessage('データがありません');
-        setTimeout(() => setMessage(''), 3000);
+        showMessage('データがありません');
         return;
       }
 
@@ -59,12 +117,10 @@ function ContentWidget() {
       const filename = generateFilename();
       downloadCSV(csvContent, filename);
 
-      setMessage(`${transactions.length}件のデータをダウンロードしました`);
-      setTimeout(() => setMessage(''), 3000);
+      showMessage(`${transactions.length}件のデータをダウンロードしました`);
     } catch (error) {
       console.error('CSV download error:', error);
-      setMessage('エラーが発生しました');
-      setTimeout(() => setMessage(''), 3000);
+      showMessage('エラーが発生しました');
     }
   };
 
@@ -105,29 +161,4 @@ function ContentWidget() {
       </div>
     </div>
   );
-}
-
-// Initialize content script
-function init() {
-  // Create container for React app
-  const container = document.createElement('div');
-  container.id = 'mf-tools-root';
-  document.body.appendChild(container);
-
-  // Render React component
-  const root = ReactDOM.createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <ContentWidget />
-    </React.StrictMode>
-  );
-
-  console.log('MoneyForward Web Tools content script loaded');
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
 }
