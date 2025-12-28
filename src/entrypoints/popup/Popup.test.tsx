@@ -1,22 +1,9 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Popup from './Popup';
 
 describe('Popup', () => {
-  beforeEach(() => {
-    // Mock chrome.tabs.create as a spy
-    globalThis.chrome = {
-      ...globalThis.chrome,
-      tabs: {
-        ...globalThis.chrome?.tabs,
-        create: vi.fn(),
-      },
-    } as typeof chrome;
-
-    vi.clearAllMocks();
-  });
-
   it('renders the popup component', () => {
     render(<Popup />);
     expect(screen.getByText('MoneyForward Web Tools')).toBeInTheDocument();
@@ -29,12 +16,14 @@ describe('Popup', () => {
   });
 
   it('opens transaction page when button is clicked', () => {
+    const createSpy = vi.spyOn(chrome.tabs, 'create');
+
     render(<Popup />);
     const button = screen.getByText('MoneyForward 入出金');
 
     fireEvent.click(button);
 
-    expect(chrome.tabs.create).toHaveBeenCalledWith({
+    expect(createSpy).toHaveBeenCalledWith({
       url: 'https://moneyforward.com/cf',
     });
   });
