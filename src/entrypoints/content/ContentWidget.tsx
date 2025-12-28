@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import '../styles/content.css';
 import { scrapeTransactionTable } from '@/utils/scraper';
 import { transactionsToCSV } from '@/utils/csv';
 import { downloadCSV, generateFilename } from '@/utils/download';
@@ -11,11 +9,25 @@ function isTransactionPage(): boolean {
 }
 
 // Content Script component
-function ContentWidget() {
+export function ContentWidget() {
   const [isVisible, setIsVisible] = React.useState(true);
   const [message, setMessage] = React.useState('');
   const [isOnTransactionPage, setIsOnTransactionPage] =
     React.useState(isTransactionPage());
+  const messageTimeoutRef = React.useRef<number | null>(null);
+
+  // Helper to set message with auto-clear
+  const showMessage = (msg: string, duration = 3000) => {
+    // Clear any existing timeout
+    if (messageTimeoutRef.current !== null) {
+      window.clearTimeout(messageTimeoutRef.current);
+    }
+    setMessage(msg);
+    messageTimeoutRef.current = window.setTimeout(() => {
+      setMessage('');
+      messageTimeoutRef.current = null;
+    }, duration);
+  };
 
   // Monitor URL changes for SPA navigation
   React.useEffect(() => {
@@ -35,20 +47,27 @@ function ContentWidget() {
     };
   }, []);
 
+  // Cleanup message timeout on unmount
+  React.useEffect(() => {
+    return () => {
+      if (messageTimeoutRef.current !== null) {
+        window.clearTimeout(messageTimeoutRef.current);
+      }
+    };
+  }, []);
+
   const handleDownloadCSV = () => {
     try {
       // Scrape transaction data
       const transactions = scrapeTransactionTable();
 
       if (!transactions) {
-        setMessage('テーブルが見つかりません');
-        setTimeout(() => setMessage(''), 3000);
+        showMessage('テーブルが見つかりません');
         return;
       }
 
       if (transactions.length === 0) {
-        setMessage('データがありません');
-        setTimeout(() => setMessage(''), 3000);
+        showMessage('データがありません');
         return;
       }
 
@@ -59,12 +78,10 @@ function ContentWidget() {
       const filename = generateFilename();
       downloadCSV(csvContent, filename);
 
-      setMessage(`${transactions.length}件のデータをダウンロードしました`);
-      setTimeout(() => setMessage(''), 3000);
+      showMessage(`${transactions.length}件のデータをダウンロードしました`);
     } catch (error) {
       console.error('CSV download error:', error);
-      setMessage('エラーが発生しました');
-      setTimeout(() => setMessage(''), 3000);
+      showMessage('エラーが発生しました');
     }
   };
 
@@ -105,29 +122,4 @@ function ContentWidget() {
       </div>
     </div>
   );
-}
-
-// Initialize content script
-function init() {
-  // Create container for React app
-  const container = document.createElement('div');
-  container.id = 'mf-tools-root';
-  document.body.appendChild(container);
-
-  // Render React component
-  const root = ReactDOM.createRoot(container);
-  root.render(
-    <React.StrictMode>
-      <ContentWidget />
-    </React.StrictMode>
-  );
-
-  console.log('MoneyForward Web Tools content script loaded');
-}
-
-// Run when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
 }

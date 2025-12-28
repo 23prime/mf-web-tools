@@ -1,13 +1,16 @@
 import { defineConfig } from 'vitest/config';
-import react from '@vitejs/plugin-react';
-import path from 'path';
+import { WxtVitest } from 'wxt/testing';
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    WxtVitest({
+      wxtConfigPath: './wxt.config.ts',
+    }),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './src/test/setup.ts',
+    // Remove setupFiles - WxtVitest auto-mocks Chrome APIs
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -17,12 +20,9 @@ export default defineConfig({
         '**/*.d.ts',
         '**/*.config.*',
         '**/dist/',
+        '**/.output/',
+        '**/.wxt/',
       ],
-    },
-  },
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
     },
   },
 });

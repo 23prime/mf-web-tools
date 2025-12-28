@@ -42,14 +42,11 @@ jobs:
       - name: Build extension
         run: pnpm build
 
-      - name: Create zip archive
-        run: |
-          cd dist
-          zip -r ../mf-web-tools-${{ github.ref_name }}.zip .
-          cd ..
+      - name: Create archives
+        run: pnpm zip
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: mf-web-tools-${{ github.ref_name }}.zip
+          files: .output/*.zip
           generate_release_notes: true

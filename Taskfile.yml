@@ -17,9 +17,16 @@ tasks:
       - mise trust -q
       - mise install
       - corepack enable pnpm
-      - pnpm install
+      - task: install
     aliases:
       - s
+
+  install:
+    desc: "Install dependencies"
+    cmds:
+      - pnpm install
+    aliases:
+      - i
 
   dev:
     desc: "Start development server"
@@ -50,3 +57,30 @@ tasks:
       - pnpm test
     aliases:
       - c
+
+  clean:
+    desc: "Clean project"
+    cmds:
+      - rm -rf node_modules
+      - rm -rf .output
+      - rm -rf .wxt
+
+  clean-build:
+    desc: "Clean build artifacts"
+    cmds:
+      - task: clean
+      - task: install
+      - task: build
+    aliases:
+      - cb
+
+  release:
+    desc: "Run all tasks for release"
+    cmds:
+      - task: clean
+      - task: install
+      - task: fix
+      - task: check
+      - task: build
+    aliases:
+      - r

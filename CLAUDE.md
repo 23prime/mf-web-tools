@@ -6,12 +6,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 MoneyForward Web Tools is a Chrome Extension (Manifest V3) that provides tools for MoneyForward websites. The project uses:
 
-- **Build System**: Vite with `vite-plugin-web-extension`
+- **Build System**: WXT
 - **Language**: TypeScript
 - **UI Framework**: React 19
 - **Styling**: Tailwind CSS v4 (with `@tailwindcss/postcss`)
 - **Package Manager**: pnpm
-- **Testing**: Vitest with React Testing Library
+- **Testing**: Vitest with WxtVitest plugin and React Testing Library
 - **Task Manager**: [Taskfile](https://taskfile.dev/)
 
 ## Common Commands
@@ -27,8 +27,8 @@ task setup
 ### Development
 
 ```bash
-task dev   # Start Vite dev server (alias: task d)
-task build # Production build (runs tsc + vite build) (alias: task b)
+task dev   # Start WXT dev server with HMR (alias: task d)
+task build # Production build with WXT (alias: task b)
 ```
 
 ### Testing
@@ -44,37 +44,50 @@ task fix   # Fix all issues (format + lint:fix) (alias: task f)
 task check # Run all checks (format:check + lint + typecheck) (alias: task c)
 ```
 
+## Development Rules
+
+**CRITICAL**: After editing any source code, you MUST run `task fix && task check` and ensure all checks pass before completing the task. This ensures:
+
+- Code is properly formatted (Prettier)
+- No linting errors (ESLint)
+- No type errors (TypeScript)
+
+This rule applies to all code changes, no exceptions.
+
 ## Architecture
 
-### Chrome Extension Structure
+### Chrome Extension Structure (WXT)
 
-The extension consists of three main components:
+The extension consists of three main components using WXT's entry point structure:
 
-1. **Popup UI** (`src/popup/`)
+1. **Popup UI** (`src/entrypoints/popup/`)
    - React application shown when clicking the extension icon
-   - Entry point: `src/popup/index.tsx` → `src/popup/index.html`
+   - Entry point: `src/entrypoints/popup/index.html` → `src/entrypoints/popup/index.tsx`
    - Uses Tailwind CSS via `src/styles/global.css`
 
-2. **Content Script** (`src/content/`)
+2. **Content Script** (`src/entrypoints/content.tsx`)
    - React component injected into MoneyForward pages (`https://*.moneyforward.com/*`)
-   - Entry point: `src/content/index.tsx`
-   - Injects itself by creating a root div and rendering into it
-   - Uses `src/styles/content.css` for isolated styling
+   - Uses Shadow DOM via WXT's `createShadowRootUi` API for complete style isolation
+   - CSS injected into Shadow DOM using `<style>` element
+   - Uses `src/styles/content.css` with explicit Tailwind utility definitions (imported with `?inline` suffix)
 
-3. **Background Service Worker** (`src/background/`)
+3. **Background Service Worker** (`src/entrypoints/background.ts`)
    - Service worker running in the background
-   - Entry point: `src/background/index.ts`
+   - Defined with `defineBackground` from WXT
    - Handles extension lifecycle events and message passing
 
 ### Build System
 
-- **vite-plugin-web-extension** handles the multi-entry point build:
+- **WXT** handles the multi-entry point build automatically:
+  - Entry points defined in `src/entrypoints/` directory
   - Popup HTML/JS/CSS
-  - Content script (specified in `additionalInputs`)
+  - Content scripts with Shadow DOM support
   - Background service worker
   - Static assets (icons in `public/`)
-- Output directory: `dist/` (ready to load as unpacked extension)
-- Manifest is processed from `src/manifest.json` to `dist/manifest.json`
+  - Manifest auto-generated from `wxt.config.ts`
+- Output directory: `.output/chrome-mv3/` (ready to load as unpacked extension)
+- Multi-browser support: Can build for Chrome, Firefox, Edge, Safari with `--browser` flag
+- Configuration: `wxt.config.ts` defines manifest, aliases, and Vite settings
 
 ### Tailwind CSS v4 Important Notes
 
@@ -88,9 +101,10 @@ This project uses Tailwind CSS v4, which has different syntax:
 ### Testing Setup
 
 - **Test framework**: Vitest with globals enabled
-- **Test setup**: `src/test/setup.ts` mocks Chrome APIs (`globalThis.chrome`)
+- **WXT integration**: WxtVitest plugin automatically mocks Chrome APIs
 - **Environment**: jsdom for DOM testing
 - Chrome API types are available via `@types/chrome`
+- Import `@testing-library/jest-dom` in test files for DOM matchers
 
 ### Path Aliases
 
@@ -106,7 +120,7 @@ import Component from '@/components/Component';
 2. Open `chrome://extensions`
 3. Enable "Developer mode"
 4. Click "Load unpacked"
-5. Select the `dist/` directory
+5. Select the `.output/chrome-mv3/` directory
 
 ## CI/CD
 
@@ -122,21 +136,41 @@ All checks must pass before merging.
 
 ## Important Implementation Details
 
+### WXT Entry Point Imports
+
+This project has auto-imports disabled (`imports: false` in `wxt.config.ts`) for explicit control. Therefore, use the following explicit import paths:
+
+- Background: `import { defineBackground } from 'wxt/utils/define-background'`
+- Content scripts: `import { defineContentScript } from 'wxt/utils/define-content-script'`
+- Shadow DOM UI: `import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root'`
+
+**Note:** WXT v0.20+ supports `#imports` virtual module when auto-imports are enabled, but this project intentionally uses explicit imports for better clarity and IDE support.
+
 ### Chrome API Mocking for Tests
 
-Tests mock the Chrome API in `src/test/setup.ts`. When adding new Chrome API usage:
+The WxtVitest plugin automatically provides Chrome API mocks. For custom mocking in specific tests:
 
-- Add the API to the mock object
-- Use `vi.fn()` for methods
-- Cast to `typeof chrome` with `as unknown as typeof chrome` to avoid type errors
+- Import `@testing-library/jest-dom` for DOM matchers
+- Mock specific Chrome APIs in `beforeEach` using `vi.fn()`
+- Assign to `globalThis.chrome` as needed
 
-### Content Script Isolation
+### Content Script Isolation with Shadow DOM
 
-Content scripts run in an isolated context but share the DOM with the page. The content script:
+Content scripts use WXT's Shadow DOM integration for complete style isolation:
 
-- Creates its own root element (`mf-tools-root`)
-- Renders React into that element
-- Uses scoped CSS to avoid conflicts with the host page
+- Uses `createShadowRootUi` API from WXT
+- Styles injected via `<style>` element with CSS text from `?inline` import
+- `src/styles/content.css` contains explicit Tailwind utility class definitions (not `@import 'tailwindcss'`)
+- React component rendered into wrapper div inside Shadow DOM
+- No style conflicts with host page
+
+**Important:** When importing CSS for Shadow DOM, use the `?inline` suffix to get raw CSS text:
+
+```typescript
+import contentCssText from '@/styles/content.css?inline';
+```
+
+The `@import 'tailwindcss'` directive won't be processed in `?inline` imports, so use explicit CSS rules instead.
 
 ### Manifest V3 Service Worker
 

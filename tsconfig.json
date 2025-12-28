@@ -1,4 +1,5 @@
 {
+  "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
@@ -28,13 +29,8 @@
     },
 
     /* Chrome Extension types */
-    "types": [
-      "chrome",
-      "vite/client",
-      "@testing-library/jest-dom",
-      "vitest/globals"
-    ]
+    "types": ["chrome", "@testing-library/jest-dom", "vitest/globals"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*", ".wxt/**/*"],
+  "exclude": ["node_modules", "dist", ".output"]
 }

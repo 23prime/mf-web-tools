@@ -4,7 +4,7 @@ export default function Popup() {
   };
 
   return (
-    <div className="w-80 p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
+    <div className="w-80 p-6 bg-linear-to-br from-blue-50 to-indigo-50">
       <h1 className="text-2xl font-bold text-gray-800 mb-4">
         MoneyForward Web Tools
       </h1>
