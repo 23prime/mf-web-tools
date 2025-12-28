@@ -44,6 +44,16 @@ task fix   # Fix all issues (format + lint:fix) (alias: task f)
 task check # Run all checks (format:check + lint + typecheck) (alias: task c)
 ```
 
+## Development Rules
+
+**CRITICAL**: After editing any source code, you MUST run `task fix && task check` and ensure all checks pass before completing the task. This ensures:
+
+- Code is properly formatted (Prettier)
+- No linting errors (ESLint)
+- No type errors (TypeScript)
+
+This rule applies to all code changes, no exceptions.
+
 ## Architecture
 
 ### Chrome Extension Structure (WXT)
