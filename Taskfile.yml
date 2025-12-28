@@ -74,8 +74,8 @@ tasks:
     aliases:
       - cb
 
-  all:
-    desc: "Run all tasks"
+  release:
+    desc: "Run all tasks for release"
     cmds:
       - task: clean
       - task: install
@@ -83,4 +83,4 @@ tasks:
       - task: check
       - task: build
     aliases:
-      - a
+      - r
