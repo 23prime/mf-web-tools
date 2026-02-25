@@ -41,7 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^8.55.0",
     "@typescript-eslint/parser": "^8.55.0",
     "@vitejs/plugin-react": "^5.1.4",
-    "@wxt-dev/auto-icons": "^1.1.0",
+    "@wxt-dev/auto-icons": "^1.1.1",
     "@wxt-dev/module-react": "^1.1.5",
     "autoprefixer": "^10.4.24",
     "eslint": "^9.39.2",
