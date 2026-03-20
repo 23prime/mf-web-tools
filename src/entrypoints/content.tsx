@@ -5,8 +5,6 @@ import { createShadowRootUi } from 'wxt/utils/content-script-ui/shadow-root';
 import { ContentWidget } from '@/entrypoints/content/ContentWidget';
 import contentCssText from '@/styles/content.css?inline';
 
-// WXT content script entry point - not a React component file
-// eslint-disable-next-line react-refresh/only-export-components
 export default defineContentScript({
   matches: ['https://*.moneyforward.com/*'],
 
