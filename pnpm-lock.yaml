@@ -53,10 +53,10 @@ importers:
         version: 5.2.0(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1))
       '@wxt-dev/auto-icons':
         specifier: ^1.1.1
-        version: 1.1.1(wxt@0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))
+        version: 1.1.1(wxt@0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))
       '@wxt-dev/module-react':
         specifier: ^1.2.2
-        version: 1.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1))(wxt@0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))
+        version: 1.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1))(wxt@0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))
       autoprefixer:
         specifier: ^10.5.0
         version: 10.5.0(postcss@8.5.10)
@@ -100,8 +100,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(@types/node@25.6.0)(jsdom@28.1.0)(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1))
       wxt:
-        specifier: ^0.20.24
-        version: 0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1)
+        specifier: ^0.20.25
+        version: 0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1)
 
 packages:
 
@@ -3561,8 +3561,8 @@ packages:
     resolution: {integrity: sha512-g/eziiSUNBSsdDJtCLB8bdYEUMj4jR7AGeUo96p/3dTafgjHhpF4RiCFPiRILwjQoDXx5MqkBr4fwWtR3Ky4Wg==}
     engines: {node: '>=20'}
 
-  wxt@0.20.24:
-    resolution: {integrity: sha512-dzvsP9t3pfXw71qPplDMoubehfGtO2Y8ZsJEL2b/EjEaf4mduKHhxlYisk7qDcgWVGY7kTcKZZ+3vX7ATs0NRg==}
+  wxt@0.20.25:
+    resolution: {integrity: sha512-ca+8Yt0Auzn9tX0ZW2Kzocb9yM8F/RoOjcYQ0fHkwcSc7/IUkqV2+1JUNn1SMSNAS4Gr3YQHAn/pi3q+jIGRqw==}
     engines: {bun: '>=1.2.0', node: '>=20.12.0'}
     hasBin: true
     peerDependencies:
@@ -4667,23 +4667,23 @@ snapshots:
 
   '@webext-core/match-patterns@1.0.3': {}
 
-  '@wxt-dev/auto-icons@1.1.1(wxt@0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))':
+  '@wxt-dev/auto-icons@1.1.1(wxt@0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))':
     dependencies:
       defu: 6.1.4
       fs-extra: 11.3.3
       sharp: 0.34.5
-      wxt: 0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1)
+      wxt: 0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1)
 
   '@wxt-dev/browser@0.1.40':
     dependencies:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.16
 
-  '@wxt-dev/module-react@1.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1))(wxt@0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))':
+  '@wxt-dev/module-react@1.2.2(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1))(wxt@0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1))':
     dependencies:
       '@vitejs/plugin-react': 5.2.0(vite@7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1))
       vite: 7.3.2(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(yaml@2.8.1)
-      wxt: 0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1)
+      wxt: 0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -7233,7 +7233,7 @@ snapshots:
       is-wsl: 3.1.1
       powershell-utils: 0.1.0
 
-  wxt@0.20.24(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1):
+  wxt@0.20.25(@types/node@25.6.0)(eslint@10.2.1(jiti@2.6.1))(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.8.1):
     dependencies:
       '@1natsu/wait-element': 4.2.0
       '@aklinker1/rollup-plugin-visualizer': 5.12.0(rollup@4.60.1)
