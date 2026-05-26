@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Popup from './Popup';
 
@@ -15,8 +15,9 @@ describe('Popup', () => {
     expect(screen.getByText('MoneyForward 入出金')).toBeInTheDocument();
   });
 
-  it('opens transaction page when button is clicked', () => {
+  it('opens transaction page and closes popup when button is clicked', async () => {
     const createSpy = vi.spyOn(chrome.tabs, 'create');
+    const closeSpy = vi.spyOn(window, 'close').mockImplementation(() => {});
 
     render(<Popup />);
     const button = screen.getByText('MoneyForward 入出金');
@@ -25,6 +26,9 @@ describe('Popup', () => {
 
     expect(createSpy).toHaveBeenCalledWith({
       url: 'https://moneyforward.com/cf',
+    });
+    await waitFor(() => {
+      expect(closeSpy).toHaveBeenCalled();
     });
   });
 });
