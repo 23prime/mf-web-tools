@@ -1,0 +1,12 @@
+minimumReleaseAge: 4320 # 3日
+
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - spawn-sync
+
+blockExoticSubdeps: true
+
+strictDepBuilds: true
+
+trustPolicy: no-downgrade
