@@ -83,8 +83,8 @@ description = "Clean and rebuild project"
 run = [{ task = "clean" }, { task = "install" }, { task = "build" }]
 alias = "cb"
 
-[tasks.release]
-description = "Run all tasks for release"
+[tasks.pre-release]
+description = "Run all tasks for release (clean + install + fix-and-check + build)"
 run = [
   { task = "clean" },
   { task = "install" },
