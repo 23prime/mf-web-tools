@@ -71,11 +71,16 @@ export function ContentWidget() {
         return;
       }
 
+      // Sort by date ascending
+      const sorted = [...transactions].sort((a, b) =>
+        a.date.localeCompare(b.date)
+      );
+
       // Convert to CSV
-      const csvContent = transactionsToCSV(transactions);
+      const csvContent = transactionsToCSV(sorted);
 
       // Download
-      const filename = generateFilename();
+      const filename = generateFilename(sorted[0].date);
       downloadCSV(csvContent, filename);
 
       showMessage(`${transactions.length}件のデータをダウンロードしました`);
