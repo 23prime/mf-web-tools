@@ -11,6 +11,9 @@ minimum_release_age = "3d"
 # ================================================================
 [tools]
 node = "24"
+gitleaks = "8"
+lefthook = "2"
+zizmor = "1"
 
 
 # ================================================================
@@ -20,7 +23,7 @@ node = "24"
 
 [tasks.setup]
 description = "Setup project"
-run = ["mise trust -q", "mise install", "corepack enable pnpm", "mise run install"]
+run = ["mise trust -q", "mise install", "corepack enable pnpm", "mise run install", "lefthook install"]
 alias = "s"
 
 [tasks.install]
@@ -67,3 +70,25 @@ run = [
   { task = "build" },
 ]
 alias = "r"
+
+# GitHub Actions
+[tasks.gh-check]
+description = "Check GitHub Actions workflows"
+run = "zizmor . --persona=pedantic --min-severity=medium"
+alias = "ghc"
+
+[tasks.gh-fix]
+description = "Fix GitHub Actions workflows"
+run = "zizmor --fix=all ."
+alias = "ghf"
+
+# Secrets
+[tasks.gitleaks-check]
+description = "Check for leaked secrets"
+run = "gitleaks git --redact --no-banner"
+alias = "glc"
+
+[tasks.gitleaks-protect]
+description = "Check staged files for leaked secrets"
+run = "gitleaks git --pre-commit --redact --no-banner"
+alias = "glp"
