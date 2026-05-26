@@ -2,6 +2,7 @@ import { defineConfig } from 'wxt';
 import react from '@vitejs/plugin-react';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readFileSync } from 'node:fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,7 +22,9 @@ export default defineConfig({
   manifest: {
     name: 'MoneyForward Web Tools',
     description: 'Web tools for MoneyForward',
-    version: '1.1.0',
+    version: (
+      JSON.parse(readFileSync('./package.json', 'utf-8')) as { version: string }
+    ).version,
     permissions: ['storage', 'activeTab'],
     host_permissions: ['https://*.moneyforward.com/*'],
   },
