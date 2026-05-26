@@ -50,11 +50,11 @@ To update the extension icons, you need to create three sizes (16x16, 48x48, 128
 
 To create a new release:
 
-1. Create and push a version tag:
+1. Bump the version and create a tag:
 
     ```sh
-    git tag v1.0.0
-    git push origin v1.0.0
+    mise run release -- <major|minor|patch>
+    git push && git push origin <tag>
     ```
 
 2. GitHub Actions will automatically:
