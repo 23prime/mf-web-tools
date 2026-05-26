@@ -46,7 +46,7 @@ mise run check # Run all checks (typecheck + format:check + lint + test) (alias:
 
 ## Development Rules
 
-**CRITICAL**: After editing any source code, you MUST run `mise run fix && mise run check` and ensure all checks pass before completing the task. This ensures:
+**CRITICAL**: After editing any source code, you MUST run `mise run fix-and-check` and ensure all checks pass before completing the task. This ensures:
 
 - Code is properly formatted (Prettier)
 - No linting errors (ESLint)

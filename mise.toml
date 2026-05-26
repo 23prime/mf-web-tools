@@ -23,7 +23,13 @@ zizmor = "1"
 
 [tasks.setup]
 description = "Setup project"
-run = ["mise trust -q", "mise install", "corepack enable pnpm", "mise run install", "lefthook install"]
+run = [
+  "mise trust -q",
+  "mise install",
+  "corepack enable pnpm",
+  "mise run install",
+  "lefthook install",
+]
 alias = "s"
 
 [tasks.install]
@@ -41,15 +47,32 @@ description = "Build project"
 run = "pnpm build"
 alias = "b"
 
-[tasks.fix]
-description = "Fix all issues (format + lint:fix)"
+# Code
+[tasks.code-fix]
+description = "Fix code issues (format + lint:fix)"
 run = ["pnpm format", "pnpm lint:fix"]
+alias = "cf"
+
+[tasks.code-check]
+description = "Check code issues (typecheck + format:check + lint + test)"
+run = ["pnpm typecheck", "pnpm format:check", "pnpm lint", "pnpm test"]
+alias = "cc"
+
+# Composite
+[tasks.fix]
+description = "Fix all issues"
+depends = ["code-fix", "gh-fix"]
 alias = "f"
 
 [tasks.check]
-description = "Check for all issues (typecheck + format:check + lint + test)"
-run = ["pnpm typecheck", "pnpm format:check", "pnpm lint", "pnpm test"]
+description = "Check for all issues"
+depends = ["code-check", "gitleaks-check"]
 alias = "c"
+
+[tasks.fix-and-check]
+description = "Fix all issues and check for issues"
+run = [{ task = "fix" }, { task = "check" }]
+alias = "fc"
 
 [tasks.clean]
 description = "Clean project artifacts"
@@ -65,8 +88,7 @@ description = "Run all tasks for release"
 run = [
   { task = "clean" },
   { task = "install" },
-  { task = "fix" },
-  { task = "check" },
+  { task = "fix-and-check" },
   { task = "build" },
 ]
 alias = "r"
