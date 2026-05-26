@@ -12,41 +12,41 @@ MoneyForward Web Tools is a Chrome Extension (Manifest V3) that provides tools f
 - **Styling**: Tailwind CSS v4 (with `@tailwindcss/postcss`)
 - **Package Manager**: pnpm
 - **Testing**: Vitest with WxtVitest plugin and React Testing Library
-- **Task Manager**: [Taskfile](https://taskfile.dev/)
+- **Task Manager**: [mise](https://mise.jdx.dev/)
 
 ## Common Commands
 
-This project uses [Task](https://taskfile.dev/) for task management. Use `task --list` to see all available tasks.
+This project uses [mise](https://mise.jdx.dev/) for task management. Use `mise tasks` to see all available tasks.
 
 ### Development Setup
 
 ```bash
-task setup
+mise run setup
 ```
 
 ### Development
 
 ```bash
-task dev   # Start WXT dev server with HMR (alias: task d)
-task build # Production build with WXT (alias: task b)
+mise run dev   # Start WXT dev server with HMR (alias: mise d)
+mise run build # Production build with WXT (alias: mise b)
 ```
 
 ### Testing
 
 ```bash
-task test
+mise run check
 ```
 
 ### Composite Tasks
 
 ```bash
-task fix   # Fix all issues (format + lint:fix) (alias: task f)
-task check # Run all checks (format:check + lint + typecheck) (alias: task c)
+mise run fix   # Fix all issues (format + lint:fix) (alias: mise f)
+mise run check # Run all checks (typecheck + format:check + lint + test) (alias: mise c)
 ```
 
 ## Development Rules
 
-**CRITICAL**: After editing any source code, you MUST run `task fix && task check` and ensure all checks pass before completing the task. This ensures:
+**CRITICAL**: After editing any source code, you MUST run `mise run fix && mise run check` and ensure all checks pass before completing the task. This ensures:
 
 - Code is properly formatted (Prettier)
 - No linting errors (ESLint)

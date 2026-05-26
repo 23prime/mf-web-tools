@@ -1,2 +1,69 @@
+# ================================================================
+# Settings
+# ================================================================
+[settings]
+auto_install = false
+minimum_release_age = "3d"
+
+
+# ================================================================
+# Tools
+# ================================================================
 [tools]
 node = "24"
+
+
+# ================================================================
+# Tasks
+# See: https://mise.jdx.dev/tasks/toml-tasks.html
+# ================================================================
+
+[tasks.setup]
+description = "Setup project"
+run = ["mise trust -q", "mise install", "corepack enable pnpm", "mise run install"]
+alias = "s"
+
+[tasks.install]
+description = "Install dependencies"
+run = "pnpm install"
+alias = "i"
+
+[tasks.dev]
+description = "Start development server"
+run = "pnpm dev"
+alias = "d"
+
+[tasks.build]
+description = "Build project"
+run = "pnpm build"
+alias = "b"
+
+[tasks.fix]
+description = "Fix all issues (format + lint:fix)"
+run = ["pnpm format", "pnpm lint:fix"]
+alias = "f"
+
+[tasks.check]
+description = "Check for all issues (typecheck + format:check + lint + test)"
+run = ["pnpm typecheck", "pnpm format:check", "pnpm lint", "pnpm test"]
+alias = "c"
+
+[tasks.clean]
+description = "Clean project artifacts"
+run = ["rm -rf node_modules", "rm -rf .output", "rm -rf .wxt"]
+
+[tasks.clean-build]
+description = "Clean and rebuild project"
+run = [{ task = "clean" }, { task = "install" }, { task = "build" }]
+alias = "cb"
+
+[tasks.release]
+description = "Run all tasks for release"
+run = [
+  { task = "clean" },
+  { task = "install" },
+  { task = "fix" },
+  { task = "check" },
+  { task = "build" },
+]
+alias = "r"
