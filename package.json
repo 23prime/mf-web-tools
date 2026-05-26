@@ -1,6 +1,6 @@
 {
   "name": "mf-web-tools",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Chrome Extension for MoneyForward Web Tools",
   "type": "module",
   "scripts": {
