@@ -1,0 +1,14 @@
+# See: https://lefthook.dev/configuration/
+
+pre-commit:
+  jobs:
+    - name: mise fix
+      run: mise fix
+
+    - name: gitleaks protect
+      run: mise gitleaks-protect
+
+pre-push:
+  jobs:
+    - name: mise check
+      run: mise check

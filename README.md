@@ -4,12 +4,12 @@ A Chrome Extension that provides MoneyForward Web tools.
 
 ## For development
 
-This project uses [Taskfile](https://taskfile.dev/) for task management.
+This project uses [mise](https://mise.jdx.dev/) for task management.
 
 You can see all available tasks with this command:
 
 ```sh
-task list
+mise tasks
 ```
 
 ### Load Extension in Chrome
@@ -17,7 +17,7 @@ task list
 1. Build the extension:
 
     ```sh
-    task build
+    mise run build
     ```
 
 2. Open Chrome and navigate to `chrome://extensions`
