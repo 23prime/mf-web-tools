@@ -80,7 +80,7 @@ export function ContentWidget() {
       const csvContent = transactionsToCSV(sorted);
 
       // Download
-      const filename = generateFilename();
+      const filename = generateFilename(sorted[0].date);
       downloadCSV(csvContent, filename);
 
       showMessage(`${transactions.length}件のデータをダウンロードしました`);
