@@ -101,7 +101,7 @@ alias = "ghc"
 
 [tasks.gh-fix]
 description = "Fix GitHub Actions workflows"
-run = "zizmor --fix=all ."
+run = "zizmor --fix=all . --persona=pedantic --min-severity=medium"
 alias = "ghf"
 
 # Secrets
