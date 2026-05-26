@@ -54,6 +54,8 @@ mise run check # Run all checks (typecheck + format:check + lint + test) (alias:
 
 This rule applies to all code changes, no exceptions.
 
+**CRITICAL**: After source code changes pass all checks, you MUST run `mise run build` and instruct the user to load the built extension in Chrome and verify the actual behavior manually. Tests verify correctness of logic, not real-world behavior in the browser.
+
 ## Architecture
 
 ### Chrome Extension Structure (WXT)
