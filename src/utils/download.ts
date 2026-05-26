@@ -26,16 +26,25 @@ export function downloadCSV(csvContent: string, filename: string): void {
 }
 
 /**
- * Generates a filename based on the transaction month stored in cookies
- * @returns Filename in format: moneyforward_transactions_YYYYMMDDhhmmss
- * @throews Error if transaction month cannot be determined from cookies
+ * Generates a filename based on the transaction month stored in cookies.
+ * Falls back to the current datetime if the cookie is not available.
+ * @returns Filename in format: moneyforward_transactions_YYYYMM or moneyforward_transactions_YYYYMMDDHHmmss
  */
 export function generateFilename(): string {
   const transactionMonth = getTransactionMonth();
-  if (!transactionMonth) {
-    throw new Error('Unable to determine transaction month from cookies.');
+  if (transactionMonth) {
+    return `moneyforward_transactions_${transactionMonth}`;
   }
-  return `moneyforward_transactions_${transactionMonth}`;
+  const now = new Date();
+  const fallback = [
+    now.getFullYear(),
+    String(now.getMonth() + 1).padStart(2, '0'),
+    String(now.getDate()).padStart(2, '0'),
+    String(now.getHours()).padStart(2, '0'),
+    String(now.getMinutes()).padStart(2, '0'),
+    String(now.getSeconds()).padStart(2, '0'),
+  ].join('');
+  return `moneyforward_transactions_${fallback}`;
 }
 
 /**
