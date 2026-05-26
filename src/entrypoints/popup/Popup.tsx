@@ -1,6 +1,7 @@
 export default function Popup() {
   const handleOpenTransactionPage = () => {
     chrome.tabs.create({ url: 'https://moneyforward.com/cf' });
+    window.close();
   };
 
   return (

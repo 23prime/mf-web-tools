@@ -15,8 +15,9 @@ describe('Popup', () => {
     expect(screen.getByText('MoneyForward 入出金')).toBeInTheDocument();
   });
 
-  it('opens transaction page when button is clicked', () => {
+  it('opens transaction page and closes popup when button is clicked', () => {
     const createSpy = vi.spyOn(chrome.tabs, 'create');
+    const closeSpy = vi.spyOn(window, 'close').mockImplementation(() => {});
 
     render(<Popup />);
     const button = screen.getByText('MoneyForward 入出金');
@@ -26,5 +27,6 @@ describe('Popup', () => {
     expect(createSpy).toHaveBeenCalledWith({
       url: 'https://moneyforward.com/cf',
     });
+    expect(closeSpy).toHaveBeenCalled();
   });
 });
