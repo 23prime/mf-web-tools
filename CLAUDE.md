@@ -116,7 +116,7 @@ import Component from '@/components/Component';
 
 ## Loading the Extension in Chrome
 
-1. Build the extension: `pnpm build`
+1. Build the extension: `mise run build`
 2. Open `chrome://extensions`
 3. Enable "Developer mode"
 4. Click "Load unpacked"
