@@ -10,3 +10,6 @@ blockExoticSubdeps: true
 strictDepBuilds: true
 
 trustPolicy: no-downgrade
+minimumReleaseAgeExclude:
+  # Renovate security update: vite@8.0.16
+  - vite@8.0.16
