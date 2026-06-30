@@ -10,6 +10,18 @@ blockExoticSubdeps: true
 strictDepBuilds: true
 
 trustPolicy: no-downgrade
+
+trustPolicyExclude:
+  # False positive: cross-major trust downgrade (semver@7.x has provenance; v6 and v7 were maintained concurrently)
+  - semver@6.3.1
+  # False positive: same cross-major pattern as semver
+  - '@webext-core/isolated-element@1.1.5'
+
 minimumReleaseAgeExclude:
   # Renovate security update: vite@8.0.16
   - vite@8.0.16
+
+allowBuilds:
+  esbuild: false
+  sharp: false
+  spawn-sync: false
