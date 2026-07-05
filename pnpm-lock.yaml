@@ -50,13 +50,13 @@ importers:
         version: 8.62.0(eslint@10.6.0(jiti@2.7.0))(typescript@6.0.3)
       '@vitejs/plugin-react':
         specifier: ^6.0.0
-        version: 6.0.3(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
+        version: 6.0.3(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
       '@wxt-dev/auto-icons':
         specifier: ^1.1.1
         version: 1.1.1(wxt@0.20.27(@types/node@25.9.4)(eslint@10.6.0(jiti@2.7.0))(jiti@2.7.0)(rolldown@1.1.4)(rollup@4.60.1)(yaml@2.8.1))
       '@wxt-dev/module-react':
         specifier: ^1.2.2
-        version: 1.2.2(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))(wxt@0.20.27(@types/node@25.9.4)(eslint@10.6.0(jiti@2.7.0))(jiti@2.7.0)(rolldown@1.1.4)(rollup@4.60.1)(yaml@2.8.1))
+        version: 1.2.2(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))(wxt@0.20.27(@types/node@25.9.4)(eslint@10.6.0(jiti@2.7.0))(jiti@2.7.0)(rolldown@1.1.4)(rollup@4.60.1)(yaml@2.8.1))
       autoprefixer:
         specifier: ^10.5.0
         version: 10.5.2(postcss@8.5.16)
@@ -95,10 +95,10 @@ importers:
         version: 6.0.3
       vite:
         specifier: ^8.0.0
-        version: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+        version: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
       vitest:
         specifier: ^4.1.8
-        version: 4.1.9(@types/node@25.9.4)(jsdom@29.1.1)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
+        version: 4.1.9(@types/node@25.9.4)(jsdom@29.1.1)(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
       wxt:
         specifier: ^0.20.26
         version: 0.20.27(@types/node@25.9.4)(eslint@10.6.0(jiti@2.7.0))(jiti@2.7.0)(rolldown@1.1.4)(rollup@4.60.1)(yaml@2.8.1)
@@ -2768,6 +2768,10 @@ packages:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
+  picomatch@4.0.5:
+    resolution: {integrity: sha512-RvwwcruNjI1ncT5xRakeyS9Lf8lcItv34KD+aif+VH9kduAyfYBipGh12274xtenIPZ119/R9BdTBa8gAwSh0A==}
+    engines: {node: '>=12'}
+
   pino-abstract-transport@2.0.0:
     resolution: {integrity: sha512-F63x5tizV6WCh4R6RHyi2Ml+M70DNRXt/+HANowMflpgGFMAym/VKm6G7ZOQRjqN7XbGxK1Lg9t6ZrtzOaivMw==}
 
@@ -3366,8 +3370,8 @@ packages:
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
 
-  vite@8.1.2:
-    resolution: {integrity: sha512-6YYPbRXTxx6bRXmOn7XdnQAy5DQNHhDgtjhDHI13oe4pY93kkcdGJWxpGwOm++/Wh0QpQhDrpIoVMrmrsI5AGQ==}
+  vite@8.1.3:
+    resolution: {integrity: sha512-Ds+gBRbj0lwRO2Y5hwnUBdxSwlAve9LeRyU4sNnAr0ewW0gWF0n5bgXgUzbgZ49MV9BVUAQUFYVcDUcilUExMA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -4480,10 +4484,10 @@ snapshots:
       '@typescript-eslint/types': 8.62.0
       eslint-visitor-keys: 5.0.1
 
-  '@vitejs/plugin-react@6.0.3(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))':
+  '@vitejs/plugin-react@6.0.3(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+      vite: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
 
   '@vitest/expect@4.1.9':
     dependencies:
@@ -4494,13 +4498,13 @@ snapshots:
       chai: 6.2.2
       tinyrainbow: 3.1.0
 
-  '@vitest/mocker@4.1.9(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))':
+  '@vitest/mocker@4.1.9(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))':
     dependencies:
       '@vitest/spy': 4.1.9
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
-      vite: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+      vite: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
 
   '@vitest/pretty-format@4.1.9':
     dependencies:
@@ -4554,10 +4558,10 @@ snapshots:
       '@types/filesystem': 0.0.36
       '@types/har-format': 1.2.16
 
-  '@wxt-dev/module-react@1.2.2(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))(wxt@0.20.27(@types/node@25.9.4)(eslint@10.6.0(jiti@2.7.0))(jiti@2.7.0)(rolldown@1.1.4)(rollup@4.60.1)(yaml@2.8.1))':
+  '@wxt-dev/module-react@1.2.2(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))(wxt@0.20.27(@types/node@25.9.4)(eslint@10.6.0(jiti@2.7.0))(jiti@2.7.0)(rolldown@1.1.4)(rollup@4.60.1)(yaml@2.8.1))':
     dependencies:
-      '@vitejs/plugin-react': 6.0.3(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
-      vite: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+      '@vitejs/plugin-react': 6.0.3(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
+      vite: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
       wxt: 0.20.27(@types/node@25.9.4)(eslint@10.6.0(jiti@2.7.0))(jiti@2.7.0)(rolldown@1.1.4)(rollup@4.60.1)(yaml@2.8.1)
     transitivePeerDependencies:
       - '@rolldown/plugin-babel'
@@ -5329,9 +5333,9 @@ snapshots:
 
   fast-redact@3.5.0: {}
 
-  fdir@6.5.0(picomatch@4.0.4):
+  fdir@6.5.0(picomatch@4.0.5):
     optionalDependencies:
-      picomatch: 4.0.4
+      picomatch: 4.0.5
 
   file-entry-cache@8.0.0:
     dependencies:
@@ -6167,6 +6171,8 @@ snapshots:
 
   picomatch@4.0.4: {}
 
+  picomatch@4.0.5: {}
+
   pino-abstract-transport@2.0.0:
     dependencies:
       split2: 4.2.0
@@ -6717,8 +6723,8 @@ snapshots:
 
   tinyglobby@0.2.17:
     dependencies:
-      fdir: 6.5.0(picomatch@4.0.4)
-      picomatch: 4.0.4
+      fdir: 6.5.0(picomatch@4.0.5)
+      picomatch: 4.0.5
 
   tinyrainbow@3.1.0: {}
 
@@ -6804,7 +6810,7 @@ snapshots:
 
   undici@7.25.0: {}
 
-  unimport@6.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)):
+  unimport@6.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)):
     dependencies:
       acorn: 8.17.0
       escape-string-regexp: 5.0.0
@@ -6818,7 +6824,7 @@ snapshots:
       scule: 1.3.0
       strip-literal: 3.1.0
       tinyglobby: 0.2.17
-      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
+      unplugin: 3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
       unplugin-utils: 0.3.1
     optionalDependencies:
       rolldown: 1.1.4
@@ -6839,7 +6845,7 @@ snapshots:
       pathe: 2.0.3
       picomatch: 4.0.4
 
-  unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)):
+  unplugin@3.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)):
     dependencies:
       '@jridgewell/remapping': 2.3.5
       picomatch: 4.0.4
@@ -6848,7 +6854,7 @@ snapshots:
       esbuild: 0.27.7
       rolldown: 1.1.4
       rollup: 4.60.1
-      vite: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+      vite: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
 
   update-browserslist-db@1.2.3(browserslist@4.28.4):
     dependencies:
@@ -6883,7 +6889,7 @@ snapshots:
       es-module-lexer: 2.2.0
       obug: 2.1.3
       pathe: 2.0.3
-      vite: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+      vite: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
     transitivePeerDependencies:
       - '@types/node'
       - '@vitejs/devtools'
@@ -6898,10 +6904,10 @@ snapshots:
       - tsx
       - yaml
 
-  vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1):
+  vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1):
     dependencies:
       lightningcss: 1.32.0
-      picomatch: 4.0.4
+      picomatch: 4.0.5
       postcss: 8.5.16
       rolldown: 1.1.4
       tinyglobby: 0.2.17
@@ -6912,10 +6918,10 @@ snapshots:
       jiti: 2.7.0
       yaml: 2.8.1
 
-  vitest@4.1.9(@types/node@25.9.4)(jsdom@29.1.1)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)):
+  vitest@4.1.9(@types/node@25.9.4)(jsdom@29.1.1)(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)):
     dependencies:
       '@vitest/expect': 4.1.9
-      '@vitest/mocker': 4.1.9(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
+      '@vitest/mocker': 4.1.9(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
       '@vitest/pretty-format': 4.1.9
       '@vitest/runner': 4.1.9
       '@vitest/snapshot': 4.1.9
@@ -6932,7 +6938,7 @@ snapshots:
       tinyexec: 1.2.4
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.0
-      vite: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+      vite: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 25.9.4
@@ -7118,8 +7124,8 @@ snapshots:
       publish-browser-extension: 4.0.5
       scule: 1.3.0
       tinyglobby: 0.2.17
-      unimport: 6.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
-      vite: 8.1.2(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
+      unimport: 6.3.0(esbuild@0.27.7)(rolldown@1.1.4)(rollup@4.60.1)(vite@8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1))
+      vite: 8.1.3(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
       vite-node: 6.0.0(@types/node@25.9.4)(esbuild@0.27.7)(jiti@2.7.0)(yaml@2.8.1)
       web-ext-run: 0.2.4
     optionalDependencies:
