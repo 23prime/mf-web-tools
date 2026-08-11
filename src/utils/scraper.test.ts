@@ -131,9 +131,9 @@ describe('scrapeTransactionTable', () => {
 
     const result = scrapeTransactionTable();
     expect(result).toHaveLength(2);
-    expect(result![0].content).toBe('買い物');
-    expect(result![0].amount).toBe('-1000');
-    expect(result![1].content).toBe('給料');
-    expect(result![1].amount).toBe('300000');
+    expect(result![0]!.content).toBe('買い物');
+    expect(result![0]!.amount).toBe('-1000');
+    expect(result![1]!.content).toBe('給料');
+    expect(result![1]!.amount).toBe('300000');
   });
 });
