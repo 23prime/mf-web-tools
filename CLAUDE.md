@@ -48,8 +48,8 @@ mise run check # Run all checks (typecheck + format:check + lint + test) (alias:
 
 **CRITICAL**: After editing any source code, you MUST run `mise run fix-and-check` and ensure all checks pass before completing the task. This ensures:
 
-- Code is properly formatted (Prettier)
-- No linting errors (ESLint)
+- Code is properly formatted (oxfmt)
+- No linting errors (oxlint)
 - No type errors (TypeScript)
 
 This rule applies to all code changes, no exceptions.
@@ -128,8 +128,8 @@ import Component from '@/components/Component';
 
 GitHub Actions workflow (`.github/workflows/ci.yml`) runs on push/PR to main:
 
-1. Prettier check
-2. ESLint
+1. oxfmt check
+2. oxlint
 3. TypeScript type check
 4. Tests
 5. Build
