@@ -1,0 +1,48 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc", "react"],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "builtin": true
+  },
+  "ignorePatterns": [
+    "dist/**",
+    "node_modules/**",
+    "*.config.js",
+    "*.config.ts",
+    ".output/**",
+    ".wxt/**"
+  ],
+  "globals": {
+    "chrome": "readonly",
+    "browser": "readonly",
+    "document": "readonly",
+    "window": "readonly",
+    "console": "readonly",
+    "global": "readonly",
+    "vi": "readonly",
+    "process": "readonly",
+    "__dirname": "readonly",
+    "setTimeout": "readonly",
+    "setInterval": "readonly",
+    "clearInterval": "readonly",
+    "Blob": "readonly",
+    "URL": "readonly",
+    "HTMLTableRowElement": "readonly",
+    "CSSStyleSheet": "readonly",
+    "ShadowRoot": "readonly"
+  },
+  "settings": {
+    "react": {
+      "version": "19.0"
+    }
+  },
+  "rules": {
+    "typescript/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
+  }
+}
