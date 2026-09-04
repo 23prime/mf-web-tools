@@ -40,6 +40,9 @@
     }
   },
   "rules": {
-    "typescript/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+    "typescript/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "warn",
+    "react/only-export-components": ["warn", { "allowConstantExport": true }]
   }
 }

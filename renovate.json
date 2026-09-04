@@ -29,14 +29,8 @@
       ]
     },
     {
-      "groupName": "eslint",
-      "matchPackageNames": [
-        "eslint",
-        "@eslint/**",
-        "@typescript-eslint/**",
-        "eslint-config-*",
-        "eslint-plugin-*"
-      ]
+      "groupName": "oxc",
+      "matchPackageNames": ["oxlint", "oxfmt", "@oxlint/**", "oxc-*"]
     },
     {
       "groupName": "vite",

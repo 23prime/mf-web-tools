@@ -58,7 +58,7 @@ To create a new release:
     ```
 
 2. GitHub Actions will automatically:
-    - Run all checks (Prettier, ESLint, TypeScript, Tests)
+    - Run all checks (oxfmt, oxlint, TypeScript, Tests)
     - Build the extension
     - Create a zip file (`mf-web-tools-v1.0.0.zip`)
     - Create a GitHub Release with the zip file attached
