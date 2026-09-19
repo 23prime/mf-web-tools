@@ -28,7 +28,7 @@
     },
 
     /* Chrome Extension types */
-    "types": ["chrome", "@testing-library/jest-dom", "vitest/globals"]
+    "types": ["chrome", "@testing-library/jest-dom/vitest", "vitest/globals"]
   },
   "include": ["src/**/*", ".wxt/**/*"],
   "exclude": ["node_modules", "dist", ".output"]
